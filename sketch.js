@@ -1,8 +1,8 @@
-var C;
+var C, U;
 var rotx = 0;
 var roty = 0;
 const W = 200;
-const colors = ['white', 'red', 'blue', 'yellow', 'orange', 'green']
+const colors = ['yellow', 'orange', 'green', 'white', 'red', 'blue']
 const faces = [
   [1, 0, 0],
   [0, 1, 0],
@@ -10,9 +10,7 @@ const faces = [
   [-1, 0, 0],
   [0, -1, 0],
   [0, 0, -1]
-]
-var top;
-var bot;
+];
 
 
 function preload() {
@@ -27,7 +25,7 @@ function setup() {
   bot = createGraphics(windowWidth, windowHeight*0.10);
   // make a new cube object
   C = new Cube(W);
-
+  U = new Ui();
 }
 
 function draw() {
@@ -35,11 +33,15 @@ function draw() {
   background(50);
 
   // camera movement
+  push();
   rotateX(rotx);
   rotateY(roty);
   
   // draw the cube
   C.show();
+  pop();
+
+  U.show();
 }
 
 function mouseDragged() {
@@ -51,6 +53,10 @@ function mouseDragged() {
 
 function keyPressed() {
   C.Rot(key);
+}
+
+function mouseClicked() {
+  U.clicked(mouseX, mouseY);
 }
 
 function rX(pos, angle) {
